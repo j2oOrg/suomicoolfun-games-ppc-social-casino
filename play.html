@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play | suomicoolfun</title>
+  <meta name="description" content="Play a free play session with clear notices and a focused, centered game view.">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    @font-face {
+      font-family: "Raneon Citylag";
+      src: url("otf/raneon-citylag-raneon-citylag-svg-400.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --ink: #e7f2ec;
+      --ink-soft: #b4c7be;
+      --forest: #050b08;
+      --pine: #0b1a14;
+      --moss: #1f4b37;
+      --fern: #2f6b4d;
+      --glow: #f2a754;
+      --glow-deep: #d9862e;
+      --card: rgba(12, 24, 18, 0.82);
+      --ring: rgba(231, 242, 236, 0.12);
+      --shadow: 0 24px 60px rgba(2, 6, 4, 0.55);
+      --radius: 24px;
+      --font-body: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
+      --font-display: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 900px at 8% -12%, rgba(47, 107, 77, 0.45), transparent 65%),
+        radial-gradient(900px 700px at 92% 8%, rgba(242, 167, 84, 0.25), transparent 60%),
+        linear-gradient(180deg, #050b08 0%, #0b1a14 52%, #0f261c 100%);
+      overflow-x: hidden;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    p {
+      line-height: 1.7;
+      margin: 0 0 1rem;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(6, 14, 10, 0.92);
+      border-bottom: 1px solid var(--ring);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(3, 7, 5, 0.6);
+    }
+    header > div {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    header > div > a {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    header nav a {
+      font-size: 0.95rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(14, 30, 23, 0.65);
+      color: var(--ink-soft);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+    }
+    header nav a:hover {
+      background: rgba(47, 107, 77, 0.4);
+      color: var(--ink);
+      border-color: rgba(242, 167, 84, 0.35);
+    }
+    main {
+      flex: 1;
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem 5rem;
+      position: relative;
+      z-index: 5;
+    }
+    section {
+      margin-bottom: 4.5rem;
+    }
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      margin: 0 0 1rem;
+      letter-spacing: 0.4px;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 3.6vw, 3.6rem);
+    }
+    h2 {
+      font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+    }
+    h3 {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--ring);
+      background: rgba(8, 16, 12, 0.7);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+    button {
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid rgba(242, 167, 84, 0.65);
+      outline-offset: 2px;
+    }
+    [data-parallax-scene] {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    [data-parallax-layer] {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.6;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+    .pl-hero-n2g7c4 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.4rem;
+      align-items: center;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      background: rgba(8, 18, 13, 0.75);
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+    }
+    .pl-notice-r5m1v8 {
+      background: rgba(10, 20, 15, 0.85);
+      border-radius: 18px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--ring);
+      box-shadow: 0 12px 28px rgba(3, 8, 6, 0.6);
+    }
+    .pl-layout-h8t3q6 {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: start;
+    }
+    .pl-info-k2p9s7 {
+      background: rgba(10, 20, 15, 0.85);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border: 1px solid var(--ring);
+      box-shadow: 0 10px 24px rgba(3, 8, 6, 0.6);
+      display: grid;
+      gap: 1rem;
+      width: min(100%, 820px);
+    }
+    .pl-info-k2p9s7 ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.6rem;
+      color: var(--ink-soft);
+    }
+    .pl-info-k2p9s7 li {
+      line-height: 1.6;
+    }
+    .pl-preview-b6w1d3 {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--ring);
+      box-shadow: 0 12px 24px rgba(3, 8, 6, 0.45);
+    }
+    .pl-controls-f4n8x2 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+    .pl-cta-u7c3z9 {
+      background: linear-gradient(135deg, var(--fern), var(--moss));
+      color: #f4fbf7;
+      border: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pl-iframewrap-t6r2a5 {
+      background: rgba(8, 18, 13, 0.8);
+      border-radius: var(--radius);
+      border: 1px solid var(--ring);
+      padding: 1.2rem;
+      display: grid;
+      gap: 0.9rem;
+      box-shadow: var(--shadow);
+      width: min(100%, 1040px);
+    }
+    .pl-mode-q9v2l7 {
+      background: rgba(47, 107, 77, 0.35);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      width: fit-content;
+    }
+    .pl-iframewrap-t6r2a5 iframe {
+      width: 100%;
+      min-height: clamp(520px, 62vh, 740px);
+      border: 0;
+      border-radius: 18px;
+      background: #0b1a14;
+    }
+    .pl-news-s4k7p1 {
+      background: linear-gradient(135deg, rgba(31, 75, 55, 0.6), rgba(10, 20, 15, 0.9));
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+    }
+    .pl-newsinner-x2j6h9 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+    .pl-newsinner-x2j6h9 form {
+      display: grid;
+      gap: 0.8rem;
+    }
+    .pl-newsinner-x2j6h9 button {
+      background: linear-gradient(135deg, var(--glow), var(--glow-deep));
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #24160b;
+    }
+    .pl-newssuccess-e7m3b2 {
+      background: rgba(12, 24, 18, 0.9);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--ring);
+    }
+    footer {
+      background: rgba(6, 12, 9, 0.9);
+      border-top: 1px solid var(--ring);
+      position: relative;
+      z-index: 5;
+    }
+    footer > div {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 3.2rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    footer strong {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+    }
+    footer nav {
+      display: grid;
+      gap: 0.4rem;
+    }
+    footer small {
+      color: var(--ink-soft);
+      display: block;
+      line-height: 1.6;
+    }
+    .pl-cookie-d5f9u1 {
+      position: fixed;
+      inset: auto 1.5rem 1.5rem auto;
+      background: rgba(8, 16, 12, 0.95);
+      border-radius: 18px;
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+      z-index: 30;
+      max-width: 420px;
+      display: none;
+    }
+    .pl-cookieinner-v8c4n6 {
+      padding: 1rem 1.2rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+    .pl-cookiebuttons-l1t7r3 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .pl-cookiebuttons-l1t7r3 button {
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--ring);
+      background: rgba(12, 24, 18, 0.9);
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .pl-cookiebuttons-l1t7r3 button:first-child {
+      background: linear-gradient(135deg, var(--fern), var(--moss));
+      color: #f4fbf7;
+      border-color: transparent;
+    }
+    @media (max-width: 1100px) {
+      .pl-newsinner-x2j6h9 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 900px) {
+      header > div {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1.6rem;
+      }
+      main {
+        padding: 2.5rem 1.6rem 4rem;
+      }
+      .pl-hero-n2g7c4 {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+      footer > div {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .pl-cookie-d5f9u1 {
+        inset: auto 1rem 1rem 1rem;
+        max-width: none;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div data-parallax-scene aria-hidden="true">
+    <span data-parallax-layer data-depth="0.08" style="width: 56vw; height: 56vw; left: -12vw; top: -28vw; background: radial-gradient(circle, rgba(47, 107, 77, 0.55), transparent 72%);"></span>
+    <span data-parallax-layer data-depth="0.18" style="width: 36vw; height: 36vw; right: -14vw; top: 10vh; background: radial-gradient(circle, rgba(242, 167, 84, 0.28), transparent 70%);"></span>
+    <span data-parallax-layer data-depth="0.12" style="width: 48vw; height: 48vw; left: 40vw; bottom: -24vw; background: radial-gradient(circle, rgba(18, 52, 38, 0.65), transparent 72%);"></span>
+  </div>
+  <header>
+    <div>
+      <a href="index.html" aria-label="suomicoolfun home">suomicoolfun</a>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="pl-hero-n2g7c4">
+      <div>
+        <p>The social casino free play room</p>
+        <h1>Play the game in a quiet, focused layout.</h1>
+        <p>This page loads a free play session only. No real money. No prizes. Virtual credits only. 18+ only.</p>
+        <p>Use the restart button any time you want a fresh session. It reloads the game without reloading the whole page.</p>
+        <p>If the frame takes a moment, give it a few seconds. Some browsers are cautious about embedded games.</p>
+      </div>
+      <div class="pl-notice-r5m1v8">
+        <h3>Free play only</h3>
+        <p>All spins are simulated for entertainment. If the frame does not load, try a different browser.</p>
+      </div>
+    </section>
+
+    <section class="pl-layout-h8t3q6">
+      <div class="pl-iframewrap-t6r2a5">
+        <div class="pl-mode-q9v2l7">Free play only</div>
+        <iframe data-game-frame title="Game frame" src="https://asccw.playngonetwork.com/casino/ContainerLauncher?pid=2&gid=goldvolcano&lang=en_GB&practice=1&channel=desktop&demo=2" loading="lazy"></iframe>
+      </div>
+      <div class="pl-info-k2p9s7">
+        <div class="pl-preview-b6w1d3">
+          <img src="volcano.png" alt="Volcano themed preview image">
+        </div>
+        <div>
+          <h2 data-game-name>Gold Volcano</h2>
+          <p data-game-tone>Warm, lava lit reels with an easy, readable pace.</p>
+          <p>The game runs inside a shared free-play container for consistency.</p>
+          <p><strong>Quick tips</strong></p>
+          <ul>
+            <li>Open the page in a full browser window for the cleanest view.</li>
+            <li>Mute the tab if you want visuals only.</li>
+            <li>Take breaks often. This is meant to be a short reset.</li>
+          </ul>
+        </div>
+        <div class="pl-controls-f4n8x2">
+          <button class="pl-cta-u7c3z9" type="button" data-reroll>Restart session</button>
+        </div>
+        <small>18+ only. For entertainment only. No real money. No prizes. Virtual credits only.</small>
+      </div>
+    </section>
+
+    <section class="pl-news-s4k7p1">
+      <div class="pl-newsinner-x2j6h9">
+        <div>
+          <h2>Get monthly updates</h2>
+          <p>One short note a month with updates and play reminders.</p>
+        </div>
+        <form data-newsletter-form aria-label="Newsletter signup">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <button type="submit">Join the list</button>
+          <p class="pl-newssuccess-e7m3b2" data-newsletter-state hidden>Thanks for joining. We will send the next note soon.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <div>
+        <strong>suomicoolfun</strong>
+        <p>A calm, forest-toned play lounge for quiet breaks.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="about.html">About</a>
+        <a href="games.html">Games</a>
+        <a href="contact.html">Contact</a>
+        <a href="terms.html">Terms</a>
+        <a href="policy.html">Privacy</a>
+      </nav>
+      <div>
+        <small>18+ only. For entertainment only. No real money. No prizes. Virtual credits only.</small>
+        <small>Play responsibly and take breaks when you need them.</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="pl-cookie-d5f9u1" data-cookie-banner role="dialog" aria-live="polite" aria-label="Cookie choices">
+    <div class="pl-cookieinner-v8c4n6">
+      <p>We store a simple preference cookie so your choice is remembered next time.</p>
+      <div class="pl-cookiebuttons-l1t7r3">
+        <button type="button" data-cookie-accept>Accept</button>
+        <button type="button" data-cookie-decline>Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple client-side helpers for cookies, form success, game selection, and parallax motion.
+    (function () {
+      // Cookie banner: remember the visitor's choice.
+      var banner = document.querySelector('[data-cookie-banner]');
+      var acceptBtn = document.querySelector('[data-cookie-accept]');
+      var declineBtn = document.querySelector('[data-cookie-decline]');
+      var stored = null;
+      try {
+        stored = localStorage.getItem('scf_cookie_choice');
+      } catch (e) {
+        stored = null;
+      }
+      if (banner && acceptBtn && declineBtn) {
+        if (!stored) {
+          banner.style.display = 'block';
+        }
+        var setChoice = function (choice) {
+          try {
+            localStorage.setItem('scf_cookie_choice', choice);
+          } catch (e) {
+            return;
+          }
+          banner.style.display = 'none';
+        };
+        acceptBtn.addEventListener('click', function () {
+          setChoice('accepted');
+        });
+        declineBtn.addEventListener('click', function () {
+          setChoice('declined');
+        });
+      }
+
+      // Newsletter form: show a success state without a backend.
+      var newsForm = document.querySelector('[data-newsletter-form]');
+      var newsState = document.querySelector('[data-newsletter-state]');
+      if (newsForm && newsState) {
+        newsForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          newsForm.reset();
+          newsForm.style.display = 'none';
+          newsState.hidden = false;
+        });
+      }
+
+      // Demo selection: load the requested game (or the only option) into the iframe.
+      var GAME_URL = 'https://asccw.playngonetwork.com/casino/ContainerLauncher?pid=2&gid=goldvolcano&lang=en_GB&practice=1&channel=desktop&demo=2';
+      var games = [
+        { id: 'goldvolcano', name: 'Gold Volcano', tone: 'Warm, lava lit reels with an easy, readable pace.', url: GAME_URL }
+      ];
+      var iframe = document.querySelector('[data-game-frame]');
+      var nameEl = document.querySelector('[data-game-name]');
+      var toneEl = document.querySelector('[data-game-tone]');
+      var rerollBtn = document.querySelector('[data-reroll]');
+      var pickRandom = function () {
+        return games[Math.floor(Math.random() * games.length)];
+      };
+      var params = new URLSearchParams(window.location.search);
+      var requested = params.get('game');
+      var current = games.find(function (game) {
+        return game.id === requested;
+      }) || pickRandom();
+
+      var renderGame = function (game) {
+        if (nameEl) {
+          nameEl.textContent = game.name;
+        }
+        if (toneEl) {
+          toneEl.textContent = game.tone;
+        }
+        if (iframe) {
+          iframe.src = game.url;
+          iframe.title = game.name + ' game';
+        }
+        if (history.replaceState) {
+          history.replaceState(null, '', '?game=' + game.id);
+        }
+      };
+      renderGame(current);
+
+      if (rerollBtn) {
+        rerollBtn.addEventListener('click', function () {
+          current = pickRandom();
+          renderGame(current);
+        });
+      }
+
+      // Parallax: shift background layers on scroll unless reduced motion is set.
+      var reduceMotion = false;
+      try {
+        reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) {
+        reduceMotion = false;
+      }
+      if (!reduceMotion) {
+        var layers = document.querySelectorAll('[data-parallax-layer]');
+        if (layers.length) {
+          var ticking = false;
+          var updateLayers = function () {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+            layers.forEach(function (layer) {
+              var depth = parseFloat(layer.getAttribute('data-depth')) || 0.1;
+              layer.style.transform = 'translate3d(0,' + scrollTop * depth + 'px,0)';
+            });
+            ticking = false;
+          };
+          var onScroll = function () {
+            if (!ticking) {
+              window.requestAnimationFrame(updateLayers);
+              ticking = true;
+            }
+          };
+          updateLayers();
+          window.addEventListener('scroll', onScroll);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+

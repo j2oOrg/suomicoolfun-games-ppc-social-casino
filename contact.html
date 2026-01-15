@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | suomicoolfun</title>
+  <meta name="description" content="Contact suomicoolfun with questions about the game, accessibility, or site policies.">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    @font-face {
+      font-family: "Raneon Citylag";
+      src: url("otf/raneon-citylag-raneon-citylag-svg-400.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --ink: #e7f2ec;
+      --ink-soft: #b4c7be;
+      --forest: #050b08;
+      --pine: #0b1a14;
+      --moss: #1f4b37;
+      --fern: #2f6b4d;
+      --glow: #f2a754;
+      --glow-deep: #d9862e;
+      --card: rgba(12, 24, 18, 0.82);
+      --ring: rgba(231, 242, 236, 0.12);
+      --shadow: 0 24px 60px rgba(2, 6, 4, 0.55);
+      --radius: 24px;
+      --font-body: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
+      --font-display: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 900px at 8% -12%, rgba(47, 107, 77, 0.45), transparent 65%),
+        radial-gradient(900px 700px at 92% 8%, rgba(242, 167, 84, 0.25), transparent 60%),
+        linear-gradient(180deg, #050b08 0%, #0b1a14 52%, #0f261c 100%);
+      overflow-x: hidden;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    p {
+      line-height: 1.7;
+      margin: 0 0 1rem;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(6, 14, 10, 0.92);
+      border-bottom: 1px solid var(--ring);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(3, 7, 5, 0.6);
+    }
+    header > div {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    header > div > a {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    header nav a {
+      font-size: 0.95rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(14, 30, 23, 0.65);
+      color: var(--ink-soft);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+    }
+    header nav a:hover {
+      background: rgba(47, 107, 77, 0.4);
+      color: var(--ink);
+      border-color: rgba(242, 167, 84, 0.35);
+    }
+    main {
+      flex: 1;
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem 5rem;
+      position: relative;
+      z-index: 5;
+    }
+    section {
+      margin-bottom: 4.5rem;
+    }
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      margin: 0 0 1rem;
+      letter-spacing: 0.4px;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 3.6vw, 3.6rem);
+    }
+    h2 {
+      font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+    }
+    h3 {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--ring);
+      background: rgba(8, 16, 12, 0.7);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    button {
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid rgba(242, 167, 84, 0.65);
+      outline-offset: 2px;
+    }
+    [data-parallax-scene] {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    [data-parallax-layer] {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.6;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+    .ct-hero-f2n6k9 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.4rem;
+      align-items: center;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      background: rgba(8, 18, 13, 0.75);
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+    }
+    .ct-formwrap-r7c2m5 {
+      background: rgba(10, 20, 15, 0.85);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border: 1px solid var(--ring);
+      box-shadow: 0 10px 24px rgba(3, 8, 6, 0.6);
+      display: grid;
+      gap: 1.6rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ct-formwrap-r7c2m5 form {
+      display: grid;
+      gap: 0.8rem;
+    }
+    .ct-formwrap-r7c2m5 button {
+      background: linear-gradient(135deg, var(--fern), var(--moss));
+      color: #f4fbf7;
+      border: none;
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .ct-formwrap-r7c2m5 ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.5rem;
+      color: var(--ink-soft);
+    }
+    .ct-formwrap-r7c2m5 li {
+      line-height: 1.6;
+    }
+    .ct-success-b9w2h7 {
+      background: rgba(12, 24, 18, 0.9);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--ring);
+    }
+    .ct-faq-x4j6s1 details {
+      background: rgba(12, 24, 18, 0.85);
+      border-radius: 16px;
+      border: 1px solid var(--ring);
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .ct-faq-x4j6s1 summary {
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .ct-news-d2g7v9 {
+      background: linear-gradient(135deg, rgba(31, 75, 55, 0.6), rgba(10, 20, 15, 0.9));
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+    }
+    .ct-newsinner-m5k1q8 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+    .ct-newsinner-m5k1q8 form {
+      display: grid;
+      gap: 0.8rem;
+    }
+    .ct-newsinner-m5k1q8 button {
+      background: linear-gradient(135deg, var(--glow), var(--glow-deep));
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #24160b;
+    }
+    .ct-newssuccess-p3t9c4 {
+      background: rgba(12, 24, 18, 0.9);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--ring);
+    }
+    footer {
+      background: rgba(6, 12, 9, 0.9);
+      border-top: 1px solid var(--ring);
+      position: relative;
+      z-index: 5;
+    }
+    footer > div {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 3.2rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    footer strong {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+    }
+    footer nav {
+      display: grid;
+      gap: 0.4rem;
+    }
+    footer small {
+      color: var(--ink-soft);
+      display: block;
+      line-height: 1.6;
+    }
+    .ct-cookie-e6r2n5 {
+      position: fixed;
+      inset: auto 1.5rem 1.5rem auto;
+      background: rgba(8, 16, 12, 0.95);
+      border-radius: 18px;
+      border: 1px solid var(--ring);
+      box-shadow: var(--shadow);
+      z-index: 30;
+      max-width: 420px;
+      display: none;
+    }
+    .ct-cookieinner-l7f1b8 {
+      padding: 1rem 1.2rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+    .ct-cookiebuttons-y9m3a2 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .ct-cookiebuttons-y9m3a2 button {
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--ring);
+      background: rgba(12, 24, 18, 0.9);
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .ct-cookiebuttons-y9m3a2 button:first-child {
+      background: linear-gradient(135deg, var(--fern), var(--moss));
+      color: #f4fbf7;
+      border-color: transparent;
+    }
+    @media (max-width: 1020px) {
+      .ct-formwrap-r7c2m5 {
+        grid-template-columns: 1fr;
+      }
+      .ct-newsinner-m5k1q8 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 900px) {
+      header > div {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1.6rem;
+      }
+      main {
+        padding: 2.5rem 1.6rem 4rem;
+      }
+      .ct-hero-f2n6k9 {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+      footer > div {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .ct-cookie-e6r2n5 {
+        inset: auto 1rem 1rem 1rem;
+        max-width: none;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div data-parallax-scene aria-hidden="true">
+    <span data-parallax-layer data-depth="0.08" style="width: 56vw; height: 56vw; left: -12vw; top: -28vw; background: radial-gradient(circle, rgba(47, 107, 77, 0.55), transparent 72%);"></span>
+    <span data-parallax-layer data-depth="0.18" style="width: 36vw; height: 36vw; right: -14vw; top: 10vh; background: radial-gradient(circle, rgba(242, 167, 84, 0.28), transparent 70%);"></span>
+    <span data-parallax-layer data-depth="0.12" style="width: 48vw; height: 48vw; left: 40vw; bottom: -24vw; background: radial-gradient(circle, rgba(18, 52, 38, 0.65), transparent 72%);"></span>
+  </div>
+  <header>
+    <div>
+      <a href="index.html" aria-label="suomicoolfun home">suomicoolfun</a>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="ct-hero-f2n6k9">
+      <div>
+        <p>Questions or feedback</p>
+        <h1>Send a note and we will reply within two business days.</h1>
+        <p>If you have a question about this social casino site or accessibility, we are happy to help.</p>
+        <p>We read every message and use the feedback to tighten the layout and improve clarity.</p>
+        <p>If something does not load, tell us your browser and device so we can reproduce it.</p>
+      </div>
+      <div>
+        <p><strong>18+ only.</strong> Entertainment only. No real money. No prizes.</p>
+      </div>
+    </section>
+
+    <section class="ct-formwrap-r7c2m5">
+      <form data-contact-form aria-label="Contact form">
+        <label>
+          Name
+          <input type="text" name="name" autocomplete="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message" required></textarea>
+        </label>
+        <button type="submit">Send message</button>
+        <p class="ct-success-b9w2h7" data-contact-state hidden>Thanks for reaching out. We will reply soon.</p>
+      </form>
+      <div>
+        <h3>Support hours</h3>
+        <p>We typically respond within two business days.</p>
+        <p>We are a small student team, so short and clear notes help a lot.</p>
+        <h3>What helps us respond faster</h3>
+        <ul>
+          <li>The page you were on and what you clicked.</li>
+          <li>Your browser and device type.</li>
+          <li>What you expected to happen versus what happened.</li>
+        </ul>
+        <h3>Quick reminders</h3>
+        <p>Practice only. No real money or prizes. 18+ only.</p>
+      </div>
+    </section>
+
+    <section class="ct-faq-x4j6s1">
+      <h2>Quick answers</h2>
+      <details>
+        <summary>Why does the game load in a frame?</summary>
+        <p>The frame keeps the game contained so the page stays readable and stable.</p>
+      </details>
+      <details>
+        <summary>Can I suggest a theme?</summary>
+        <p>Yes. Share your idea in the form and we will read it.</p>
+      </details>
+      <details>
+        <summary>Is there any purchase option?</summary>
+        <p>No. There is no real money play or prizes on this site.</p>
+      </details>
+      <details>
+        <summary>Can you remove my email from the list?</summary>
+        <p>Yes. Send a quick note and we will take care of it.</p>
+      </details>
+      <details>
+        <summary>What if the game does not load?</summary>
+        <p>Try another browser and let us know what you were using.</p>
+      </details>
+    </section>
+
+    <section class="ct-news-d2g7v9">
+      <div class="ct-newsinner-m5k1q8">
+        <div>
+          <h2>Get a monthly update</h2>
+          <p>We send one short note a month with updates and reminders.</p>
+          <p>No spam, no daily blasts, and no surprise promos.</p>
+        </div>
+        <form data-newsletter-form aria-label="Newsletter signup">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <button type="submit">Join the list</button>
+          <p class="ct-newssuccess-p3t9c4" data-newsletter-state hidden>Thanks for joining. We will send the next note soon.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <div>
+        <strong>suomicoolfun</strong>
+        <p>A calm, forest-toned play lounge for quiet breaks.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="about.html">About</a>
+        <a href="games.html">Games</a>
+        <a href="contact.html">Contact</a>
+        <a href="terms.html">Terms</a>
+        <a href="policy.html">Privacy</a>
+      </nav>
+      <div>
+        <small>18+ only. For entertainment only. No real money. No prizes. Virtual credits only.</small>
+        <small>Play responsibly and take breaks when you need them.</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="ct-cookie-e6r2n5" data-cookie-banner role="dialog" aria-live="polite" aria-label="Cookie choices">
+    <div class="ct-cookieinner-l7f1b8">
+      <p>We store a simple preference cookie so your choice is remembered next time.</p>
+      <div class="ct-cookiebuttons-y9m3a2">
+        <button type="button" data-cookie-accept>Accept</button>
+        <button type="button" data-cookie-decline>Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple client-side helpers for cookies, form success, and parallax motion.
+    (function () {
+      // Cookie banner: remember the visitor's choice.
+      var banner = document.querySelector('[data-cookie-banner]');
+      var acceptBtn = document.querySelector('[data-cookie-accept]');
+      var declineBtn = document.querySelector('[data-cookie-decline]');
+      var stored = null;
+      try {
+        stored = localStorage.getItem('scf_cookie_choice');
+      } catch (e) {
+        stored = null;
+      }
+      if (banner && acceptBtn && declineBtn) {
+        if (!stored) {
+          banner.style.display = 'block';
+        }
+        var setChoice = function (choice) {
+          try {
+            localStorage.setItem('scf_cookie_choice', choice);
+          } catch (e) {
+            return;
+          }
+          banner.style.display = 'none';
+        };
+        acceptBtn.addEventListener('click', function () {
+          setChoice('accepted');
+        });
+        declineBtn.addEventListener('click', function () {
+          setChoice('declined');
+        });
+      }
+
+      // Newsletter form: show a success state without a backend.
+      var newsForm = document.querySelector('[data-newsletter-form]');
+      var newsState = document.querySelector('[data-newsletter-state]');
+      if (newsForm && newsState) {
+        newsForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          newsForm.reset();
+          newsForm.style.display = 'none';
+          newsState.hidden = false;
+        });
+      }
+
+      // Contact form: show a friendly success message without sending data.
+      var contactForm = document.querySelector('[data-contact-form]');
+      var contactState = document.querySelector('[data-contact-state]');
+      if (contactForm && contactState) {
+        contactForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          contactForm.reset();
+          contactForm.style.display = 'none';
+          contactState.hidden = false;
+        });
+      }
+
+      // Parallax: shift background layers on scroll unless reduced motion is set.
+      var reduceMotion = false;
+      try {
+        reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) {
+        reduceMotion = false;
+      }
+      if (!reduceMotion) {
+        var layers = document.querySelectorAll('[data-parallax-layer]');
+        if (layers.length) {
+          var ticking = false;
+          var updateLayers = function () {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+            layers.forEach(function (layer) {
+              var depth = parseFloat(layer.getAttribute('data-depth')) || 0.1;
+              layer.style.transform = 'translate3d(0,' + scrollTop * depth + 'px,0)';
+            });
+            ticking = false;
+          };
+          var onScroll = function () {
+            if (!ticking) {
+              window.requestAnimationFrame(updateLayers);
+              ticking = true;
+            }
+          };
+          updateLayers();
+          window.addEventListener('scroll', onScroll);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
