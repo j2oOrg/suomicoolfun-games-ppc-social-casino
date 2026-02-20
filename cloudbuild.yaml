@@ -12,8 +12,8 @@ substitutions:
   _SERVICE_PORT: "80"
   _AR_LOCATION: europe-north1
   _AR_REPOSITORY: ourimages
-  _HOSTNAME: suomicoolfun.com
-  _ALT_HOSTNAME: www.suomicoolfun.com
+  _HOSTNAME: suomicoolfun.games
+  _ALT_HOSTNAME: www.suomicoolfun.games
   # optional DNS automation, fill only if you want it
 
 steps:

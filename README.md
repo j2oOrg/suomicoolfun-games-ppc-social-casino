@@ -1,2 +1,2 @@
 # suomicoolfun
-Repository for suomicoolfun.com
+Repository for suomicoolfun.games
