@@ -46,7 +46,9 @@ steps:
 
         gcloud container clusters get-credentials ${_CLUSTER_NAME} --region=${_CLUSTER_REGION}
 
-        cat > k8s.yaml <<'EOF'
+        IMAGE_TAG="${_AR_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_APP_NAME}:latest"
+
+        cat > k8s.yaml <<EOF
         apiVersion: v1
         kind: Namespace
         metadata: { name: ${_K8S_NAMESPACE} }
@@ -68,7 +70,8 @@ steps:
             spec:
               containers:
                 - name: web
-                  image: ${_AR_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_APP_NAME}:${COMMIT_SHA}
+                  image: ${IMAGE_TAG}
+                  imagePullPolicy: Always
                   ports: [ { containerPort: ${_CONTAINER_PORT} } ]
                   readinessProbe: { httpGet: { path: /, port: ${_CONTAINER_PORT} }, initialDelaySeconds: 2, periodSeconds: 5 }
                   livenessProbe:  { httpGet: { path: /, port: ${_CONTAINER_PORT} }, initialDelaySeconds: 10, periodSeconds: 10 }
@@ -144,6 +147,7 @@ steps:
         EOF
 
         kubectl apply -f k8s.yaml
+        kubectl -n ${_K8S_NAMESPACE} rollout restart deployment/${_APP_NAME}
         kubectl -n ${_K8S_NAMESPACE} rollout status deployment/${_APP_NAME}
 
 
