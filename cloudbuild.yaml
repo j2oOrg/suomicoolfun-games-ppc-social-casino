@@ -46,8 +46,6 @@ steps:
 
         gcloud container clusters get-credentials ${_CLUSTER_NAME} --region=${_CLUSTER_REGION}
 
-        IMAGE_TAG="${_AR_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_APP_NAME}:latest"
-
         cat > k8s.yaml <<EOF
         apiVersion: v1
         kind: Namespace
@@ -70,7 +68,7 @@ steps:
             spec:
               containers:
                 - name: web
-                  image: ${IMAGE_TAG}
+                  image: ${_AR_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_APP_NAME}:latest
                   imagePullPolicy: Always
                   ports: [ { containerPort: ${_CONTAINER_PORT} } ]
                   readinessProbe: { httpGet: { path: /, port: ${_CONTAINER_PORT} }, initialDelaySeconds: 2, periodSeconds: 5 }
