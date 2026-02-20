@@ -1,632 +1,190 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Games | suomicoolfun</title>
-  <meta name="description" content="Meet Gold Volcano and open the free play room with a calm, steady pace.">
-  <link rel="icon" href="favicon.ico">
-  <style>
-    @font-face {
-      font-family: "Raneon Citylag";
-      src: url("otf/raneon-citylag-raneon-citylag-svg-400.otf") format("opentype");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    :root {
-      --ink: #e7f2ec;
-      --ink-soft: #b4c7be;
-      --forest: #050b08;
-      --pine: #0b1a14;
-      --moss: #1f4b37;
-      --fern: #2f6b4d;
-      --glow: #f2a754;
-      --glow-deep: #d9862e;
-      --card: rgba(12, 24, 18, 0.82);
-      --ring: rgba(231, 242, 236, 0.12);
-      --shadow: 0 24px 60px rgba(2, 6, 4, 0.55);
-      --radius: 24px;
-      --font-body: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
-      --font-display: "Raneon Citylag", "Trebuchet MS", "Segoe UI", sans-serif;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      font-family: var(--font-body);
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 900px at 8% -12%, rgba(47, 107, 77, 0.45), transparent 65%),
-        radial-gradient(900px 700px at 92% 8%, rgba(242, 167, 84, 0.25), transparent 60%),
-        linear-gradient(180deg, #050b08 0%, #0b1a14 52%, #0f261c 100%);
-      overflow-x: hidden;
-    }
-    img {
-      max-width: 100%;
-      display: block;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    p {
-      line-height: 1.7;
-      margin: 0 0 1rem;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(6, 14, 10, 0.92);
-      border-bottom: 1px solid var(--ring);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 40px rgba(3, 7, 5, 0.6);
-    }
-    header > div {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 1.2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    header > div > a {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    header nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    header nav a {
-      font-size: 0.95rem;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(14, 30, 23, 0.65);
-      color: var(--ink-soft);
-      border: 1px solid transparent;
-      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
-    }
-    header nav a:hover {
-      background: rgba(47, 107, 77, 0.4);
-      color: var(--ink);
-      border-color: rgba(242, 167, 84, 0.35);
-    }
-    main {
-      flex: 1;
-      max-width: 1240px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 3.5rem 2.5rem 5rem;
-      position: relative;
-      z-index: 5;
-    }
-    section {
-      margin-bottom: 4.5rem;
-    }
-    h1, h2, h3 {
-      font-family: var(--font-display);
-      margin: 0 0 1rem;
-      letter-spacing: 0.4px;
-    }
-    h1 {
-      font-size: clamp(2.6rem, 3.6vw, 3.6rem);
-    }
-    h2 {
-      font-size: clamp(1.8rem, 2.6vw, 2.5rem);
-    }
-    h3 {
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border-radius: 12px;
-      border: 1px solid var(--ring);
-      background: rgba(8, 16, 12, 0.7);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 1rem;
-    }
-    button {
-      font-family: var(--font-body);
-      font-size: 1rem;
-    }
-    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-      outline: 3px solid rgba(242, 167, 84, 0.65);
-      outline-offset: 2px;
-    }
-    [data-parallax-scene] {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    [data-parallax-layer] {
-      position: absolute;
-      border-radius: 999px;
-      opacity: 0.6;
-      transform: translate3d(0, 0, 0);
-      will-change: transform;
-    }
-    .gm-hero-t2f7k9 {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2.4rem;
-      align-items: center;
-      padding: 2.5rem;
-      border-radius: var(--radius);
-      background: rgba(8, 18, 13, 0.75);
-      border: 1px solid var(--ring);
-      box-shadow: var(--shadow);
-    }
-    .gm-note-v1d7s2 {
-      background: rgba(10, 20, 15, 0.85);
-      border-radius: 18px;
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--ring);
-      box-shadow: 0 12px 28px rgba(3, 8, 6, 0.6);
-    }
-    .gm-grid-m8c4p1 {
-      display: grid;
-      gap: 1.2rem;
-      grid-template-columns: minmax(0, 1fr);
-      max-width: 520px;
-      margin: 0 auto;
-    }
-    .gm-grid-m8c4p1 article {
-      background: rgba(12, 24, 18, 0.85);
-      border-radius: 18px;
-      padding: 1.2rem;
-      border: 1px solid var(--ring);
-      display: grid;
-      gap: 0.6rem;
-      box-shadow: 0 10px 24px rgba(3, 8, 6, 0.5);
-      width: 100%;
-    }
-    .gm-grid-m8c4p1 article > div {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .gm-grid-m8c4p1 svg {
-      width: 52px;
-      height: 52px;
-    }
-    .gm-grid-m8c4p1 span {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background: rgba(47, 107, 77, 0.3);
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      color: var(--ink-soft);
-    }
-    .gm-grid-m8c4p1 a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--fern), var(--moss));
-      color: #f4fbf7;
-      padding: 0.6rem 1.1rem;
-      border-radius: 999px;
-      font-weight: 700;
-      width: fit-content;
-    }
-    .gm-notes-x4q7m2 {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
-      align-items: start;
-      padding: 2.6rem;
-      border-radius: var(--radius);
-      background: rgba(8, 18, 13, 0.75);
-      border: 1px solid var(--ring);
-      box-shadow: var(--shadow);
-    }
-    .gm-notes-x4q7m2 p {
-      color: var(--ink-soft);
-    }
-    .gm-notes-x4q7m2 h3 {
-      text-transform: none;
-      letter-spacing: 0.3px;
-      font-size: 1.1rem;
-      margin-top: 0.2rem;
-    }
-    .gm-notes-x4q7m2 > div:last-child {
-      background: rgba(10, 20, 15, 0.85);
-      border-radius: 18px;
-      padding: 1.5rem;
-      border: 1px solid var(--ring);
-      display: grid;
-      gap: 1rem;
-    }
-    .gm-notes-x4q7m2 ul {
-      margin: 0;
-      padding-left: 1.2rem;
-      display: grid;
-      gap: 0.6rem;
-      color: var(--ink-soft);
-    }
-    .gm-notes-x4q7m2 li {
-      line-height: 1.6;
-    }
-    .gm-news-q5h2r8 {
-      background: linear-gradient(135deg, rgba(31, 75, 55, 0.6), rgba(10, 20, 15, 0.9));
-      border-radius: var(--radius);
-      padding: 2.2rem;
-      border: 1px solid var(--ring);
-      box-shadow: var(--shadow);
-    }
-    .gm-newsinner-z9b6j3 {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-    }
-    .gm-newsinner-z9b6j3 form {
-      display: grid;
-      gap: 0.8rem;
-    }
-    .gm-newsinner-z9b6j3 button {
-      background: linear-gradient(135deg, var(--glow), var(--glow-deep));
-      border: none;
-      padding: 0.8rem 1rem;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #24160b;
-    }
-    .gm-newssuccess-u2k8e5 {
-      background: rgba(12, 24, 18, 0.9);
-      border-radius: 14px;
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--ring);
-    }
-    footer {
-      background: rgba(6, 12, 9, 0.9);
-      border-top: 1px solid var(--ring);
-      position: relative;
-      z-index: 5;
-    }
-    footer > div {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 2.5rem 2.5rem 3.2rem;
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    footer strong {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-    }
-    footer nav {
-      display: grid;
-      gap: 0.4rem;
-    }
-    footer small {
-      color: var(--ink-soft);
-      display: block;
-      line-height: 1.6;
-    }
-    .gm-cookie-w7m1c9 {
-      position: fixed;
-      inset: auto 1.5rem 1.5rem auto;
-      background: rgba(8, 16, 12, 0.95);
-      border-radius: 18px;
-      border: 1px solid var(--ring);
-      box-shadow: var(--shadow);
-      z-index: 30;
-      max-width: 420px;
-      display: none;
-    }
-    .gm-cookieinner-p4t8n2 {
-      padding: 1rem 1.2rem;
-      display: grid;
-      gap: 0.8rem;
-    }
-    .gm-cookiebuttons-x3f6l1 {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .gm-cookiebuttons-x3f6l1 button {
-      border-radius: 999px;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--ring);
-      background: rgba(12, 24, 18, 0.9);
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .gm-cookiebuttons-x3f6l1 button:first-child {
-      background: linear-gradient(135deg, var(--fern), var(--moss));
-      color: #f4fbf7;
-      border-color: transparent;
-    }
-    @media (max-width: 1200px) {
-      .gm-grid-m8c4p1 {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 1020px) {
-      .gm-grid-m8c4p1 {
-        grid-template-columns: 1fr;
-      }
-      .gm-newsinner-z9b6j3 {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 900px) {
-      header > div {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 1.6rem;
-      }
-      main {
-        padding: 2.5rem 1.6rem 4rem;
-      }
-      .gm-hero-t2f7k9 {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
-      .gm-notes-x4q7m2 {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
-      footer > div {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 640px) {
-      .gm-grid-m8c4p1 {
-        grid-template-columns: 1fr;
-      }
-      .gm-cookie-w7m1c9 {
-        inset: auto 1rem 1rem 1rem;
-        max-width: none;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>All Games - suomicoolfun Gaming</title>
+    <meta name="description" content="Browse all suomicoolfun games in one place, launch instantly in your browser, and enjoy social casino gameplay without spending money." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://suomicoolfun.com/games.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="suomicoolfun" />
+    <meta property="og:title" content="All Games - suomicoolfun Gaming" />
+    <meta property="og:description" content="Browse all suomicoolfun games in one place, launch instantly in your browser, and enjoy social casino gameplay without spending money." />
+    <meta property="og:url" content="https://suomicoolfun.com/games.html" />
+    <meta property="og:image" content="https://suomicoolfun.com/assets/images/fire-joker.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="All Games - suomicoolfun Gaming" />
+    <meta name="twitter:description" content="Browse all suomicoolfun games in one place, launch instantly in your browser, and enjoy social casino gameplay without spending money." />
+    <meta name="twitter:image" content="https://suomicoolfun.com/assets/images/fire-joker.webp" />
+    <meta name="theme-color" content="#0e1222" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link href="assets/styles/css2.css" rel="stylesheet" />
+    <link rel='stylesheet' href='assets/styles/rebrand.css' />
 </head>
-<body>
-  <div data-parallax-scene aria-hidden="true">
-    <span data-parallax-layer data-depth="0.08" style="width: 56vw; height: 56vw; left: -12vw; top: -28vw; background: radial-gradient(circle, rgba(47, 107, 77, 0.55), transparent 72%);"></span>
-    <span data-parallax-layer data-depth="0.18" style="width: 36vw; height: 36vw; right: -14vw; top: 10vh; background: radial-gradient(circle, rgba(242, 167, 84, 0.28), transparent 70%);"></span>
-    <span data-parallax-layer data-depth="0.12" style="width: 48vw; height: 48vw; left: 40vw; bottom: -24vw; background: radial-gradient(circle, rgba(18, 52, 38, 0.65), transparent 72%);"></span>
-  </div>
-  <header>
-    <div>
-      <a href="index.html" aria-label="suomicoolfun home">suomicoolfun</a>
-      <nav aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="games.html">Games</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <section class="gm-hero-t2f7k9">
-      <div>
-        <p>The social casino shelf</p>
-        <h1>One game, tuned for a calm free play session.</h1>
-        <p>We keep the shelf simple on purpose: Gold Volcano, with warm visuals and a steady pace.</p>
-        <p>Since there is only one game, this page is more of a quick note than a full catalog.</p>
-        <p>If you want to jump in right away, the card below opens the same game you see on the play page.</p>
-      </div>
-      <div class="gm-note-v1d7s2">
-        <h3>Quick reminder</h3>
-        <p>18+ only. Entertainment only. No real money. No prizes.</p>
-      </div>
-    </section>
 
-    <section>
-      <h2>The game</h2>
-      <p>Gold Volcano is the only title here. The label and icon are just a quick cue so the page is easy to scan.</p>
-      <div class="gm-grid-m8c4p1">
-        <article>
-          <div>
-            <svg viewBox="0 0 64 64" role="img" aria-label="Volcano icon">
-              <circle cx="32" cy="32" r="30" fill="#f2a754"/>
-              <path d="M14 44h36l-8-20-8 10-8-8z" fill="#1f4b37"/>
-            </svg>
-            <span>Lava</span>
+  <body>
+    <div class="bg-wrapper"></div>
+
+    <!-- Top Disclaimer Bar -->
+    <div class="top-disclaimer-bar">
+      <div class="disclaimer-badges">
+        <span class="disclaimer-badge"
+          >🎮 Free-to-play social casino games</span
+        >
+        <span class="disclaimer-badge">💵 No real money gambling</span>
+        <span class="disclaimer-badge"
+          >🚫 No cash prizes or real-world rewards</span
+        >
+        <span class="disclaimer-badge">🎭 Entertainment purposes only</span>
+        <span class="disclaimer-badge age-badge">🔞 18+</span>
+      </div>
+    </div>
+
+    <header>
+      <div class="header-content">
+        <a href="w.html" class="brand">suomicoolfun</a>
+        <nav>
+          <ul>
+            <li><a href="w.html">Home</a></li>
+            <li><a href="games.html">Games</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-line"></div>
+    </header>
+
+    <div class="page-hero">
+      <h1 class="page-title">All Games</h1>
+      <p class="page-subtitle">
+        6 Elite Games • Completely Free • Start Immediately
+      </p>
+    </div>
+
+    <div class="games-container">
+      <div class="games-grid">
+        <div class="game-card">
+          <div class="game-img">
+            <img
+              src="assets/images/bull-in-a-rodeo.webp"
+              alt="Bull in a Rodeo"
+            />
+            <div class="game-badge">🐂 HOT</div>
           </div>
-          <h3>Gold Volcano</h3>
-          <p>A warm, lava lit theme with a steady, readable pace.</p>
-          <a href="play.html?game=goldvolcano">Play</a>
-        </article>
-      </div>
-      <p>The game uses a shared free-play launcher so the load is consistent and centered every time.</p>
-      <p>If you refresh the page, the session resets. There is no progress to save or track.</p>
-    </section>
-
-    <section class="gm-notes-x4q7m2">
-      <div>
-        <h2>Why this page stays short</h2>
-        <p>Most social casino sites are huge catalogs, and I honestly get lost in them. I built this page to feel more like a clean note than a shopping list.</p>
-        <p>If you spot the word kasinot on the site, it is just a small Finnish nod to the theme.</p>
-        <p>Gold Volcano is here because it looks good in this dark, forest palette and the pacing feels steady. That makes it easier to tune the spacing and keep the buttons readable.</p>
-      <p>The session runs on virtual credits, so nothing on screen has cash value. There are no prizes, no deposits, no purchases, and no pressure to keep going.</p>
-        <p>I usually open the game for a few minutes between classes. It is a quick reset, not a marathon.</p>
-        <p>If you want more variety, send a note. For now, one game keeps the vibe focused.</p>
-      </div>
-      <div>
-        <div>
-          <h3>What this one game is good for</h3>
-          <ul>
-            <li>A short visual break when you want to clear your head.</li>
-            <li>Learning the rhythm of reels without spending money.</li>
-            <li>Large, calm UI you can read without squinting.</li>
-            <li>Quick sessions that do not ask for an account.</li>
-          </ul>
+          <div class="game-body">
+            <h3 class="game-title">Bull in a Rodeo</h3>
+            <p class="game-desc">
+              Experience the wild west excitement with thrilling rodeo action
+              and intense gaming moments!
+            </p>
+            <div class="game-tags">
+              <span class="tag">🐂 Wild West</span>
+              <span class="tag">⚡ Action</span>
+            </div>
+            <a href="g1.html" class="play-btn">Play Now</a>
+          </div>
         </div>
-        <div>
-          <h3>What it is not</h3>
-          <ul>
-            <li>It is not a place to win prizes or withdraw anything.</li>
-            <li>It is not a high-pressure, endless catalog of games.</li>
-            <li>It is not built around leaderboards or rankings.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <section class="gm-news-q5h2r8">
-      <div class="gm-newsinner-z9b6j3">
-        <div>
-          <h2>Get monthly updates</h2>
-          <p>We send one short email a month with updates and play reminders.</p>
-          <p>It is low volume on purpose. You will not get daily messages or surprise promos.</p>
+        <div class="game-card">
+          <div class="game-img">
+            <img src="assets/images/crabby-s-gold.webp" alt="Crabby's Gold" />
+            <div class="game-badge">🦀 TREASURE</div>
+          </div>
+          <div class="game-body">
+            <h3 class="game-title">Crabby's Gold</h3>
+            <p class="game-desc">
+              Dive deep into the ocean and discover hidden treasures with Crabby
+              in this exciting underwater adventure!
+            </p>
+            <div class="game-tags">
+              <span class="tag">🦀 Ocean</span>
+              <span class="tag">💎 Treasure</span>
+            </div>
+            <a href="g2.html" class="play-btn">Play Now</a>
+          </div>
         </div>
-        <form data-newsletter-form aria-label="Newsletter signup">
-          <label>
-            Name
-            <input type="text" name="name" autocomplete="name" required>
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
-          <button type="submit">Notify me</button>
-          <p class="gm-newssuccess-u2k8e5" data-newsletter-state hidden>Thanks for joining. We will send the next update soon.</p>
-        </form>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <div>
-      <div>
-        <strong>suomicoolfun</strong>
-        <p>A calm, forest-toned play lounge for quiet breaks.</p>
-      </div>
-      <nav aria-label="Footer">
-        <a href="about.html">About</a>
-        <a href="games.html">Games</a>
-        <a href="contact.html">Contact</a>
-        <a href="terms.html">Terms</a>
-        <a href="policy.html">Privacy</a>
-      </nav>
-      <div>
-        <small>18+ only. For entertainment only. No real money. No prizes. Virtual credits only. No purchases.</small>
-        <small>Play responsibly and take breaks when you need them.</small>
+        <div class="game-card">
+          <div class="game-img">
+            <img
+              src="assets/images/15-crystal-roses-a-tale-of-love.jpg"
+              alt="15 Crystal Roses A Tale of Love"
+            />
+            <div class="game-badge">🌹 ROMANCE</div>
+          </div>
+          <div class="game-body">
+            <h3 class="game-title">15 Crystal Roses A Tale of Love</h3>
+            <p class="game-desc">
+              Embark on a romantic journey filled with beautiful crystal roses
+              and enchanting love stories!
+            </p>
+            <div class="game-tags">
+              <span class="tag">🌹 Romance</span>
+              <span class="tag">💎 Crystal</span>
+            </div>
+            <a href="g3.html" class="play-btn">Play Now</a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img">
+            <img src="assets/images/fire-joker.webp" alt="Fire Joker" />
+            <div class="game-badge">🔥 FIRE</div>
+          </div>
+          <div class="game-body">
+            <h3 class="game-title">Fire Joker</h3>
+            <p class="game-desc">
+              Feel the heat with Fire Joker's blazing reels and scorching hot
+              winning opportunities!
+            </p>
+            <div class="game-tags">
+              <span class="tag">🔥 Fire</span>
+              <span class="tag">🎰 Classic</span>
+            </div>
+            <a href="g4.html" class="play-btn">Play Now</a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img">
+            <img src="assets/images/mount-m.webp" alt="Mount M" />
+            <div class="game-badge">⛰️ ADVENTURE</div>
+          </div>
+          <div class="game-body">
+            <h3 class="game-title">Mount M</h3>
+            <p class="game-desc">
+              Climb to the peak of excitement and conquer Mount M's challenging
+              slopes and rewards!
+            </p>
+            <div class="game-tags">
+              <span class="tag">⛰️ Mountain</span>
+              <span class="tag">🏔️ Adventure</span>
+            </div>
+            <a href="g5.html" class="play-btn">Play Now</a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img">
+            <img src="assets/images/piggy-heist.jpg" alt="Piggy Heist" />
+            <div class="game-badge">🐷 HEIST</div>
+          </div>
+          <div class="game-body">
+            <h3 class="game-title">Piggy Heist</h3>
+            <p class="game-desc">
+              Join the ultimate heist adventure with Piggy and steal your way to
+              massive rewards!
+            </p>
+            <div class="game-tags">
+              <span class="tag">🐷 Heist</span>
+              <span class="tag">💰 Rewards</span>
+            </div>
+            <a href="g6.html" class="play-btn">Play Now</a>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
-
-  <div class="gm-cookie-w7m1c9" data-cookie-banner role="dialog" aria-live="polite" aria-label="Cookie choices">
-    <div class="gm-cookieinner-p4t8n2">
-      <p>We store a simple preference cookie so your choice is remembered next time.</p>
-      <div class="gm-cookiebuttons-x3f6l1">
-        <button type="button" data-cookie-accept>Accept</button>
-        <button type="button" data-cookie-decline>Decline</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Simple client-side helpers for cookies, form success, and parallax motion.
-    (function () {
-      // Cookie banner: remember the visitor's choice.
-      var banner = document.querySelector('[data-cookie-banner]');
-      var acceptBtn = document.querySelector('[data-cookie-accept]');
-      var declineBtn = document.querySelector('[data-cookie-decline]');
-      var stored = null;
-      try {
-        stored = localStorage.getItem('scf_cookie_choice');
-      } catch (e) {
-        stored = null;
-      }
-      if (banner && acceptBtn && declineBtn) {
-        if (!stored) {
-          banner.style.display = 'block';
-        }
-        var setChoice = function (choice) {
-          try {
-            localStorage.setItem('scf_cookie_choice', choice);
-          } catch (e) {
-            return;
-          }
-          banner.style.display = 'none';
-        };
-        acceptBtn.addEventListener('click', function () {
-          setChoice('accepted');
-        });
-        declineBtn.addEventListener('click', function () {
-          setChoice('declined');
-        });
-      }
-
-      // Newsletter form: show a success state without a backend.
-      var newsForm = document.querySelector('[data-newsletter-form]');
-      var newsState = document.querySelector('[data-newsletter-state]');
-      if (newsForm && newsState) {
-        newsForm.addEventListener('submit', function (event) {
-          event.preventDefault();
-          newsForm.reset();
-          newsForm.style.display = 'none';
-          newsState.hidden = false;
-        });
-      }
-
-      // Parallax: shift background layers on scroll unless reduced motion is set.
-      var reduceMotion = false;
-      try {
-        reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      } catch (e) {
-        reduceMotion = false;
-      }
-      if (!reduceMotion) {
-        var layers = document.querySelectorAll('[data-parallax-layer]');
-        if (layers.length) {
-          var ticking = false;
-          var updateLayers = function () {
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-            layers.forEach(function (layer) {
-              var depth = parseFloat(layer.getAttribute('data-depth')) || 0.1;
-              layer.style.transform = 'translate3d(0,' + scrollTop * depth + 'px,0)';
-            });
-            ticking = false;
-          };
-          var onScroll = function () {
-            if (!ticking) {
-              window.requestAnimationFrame(updateLayers);
-              ticking = true;
-            }
-          };
-          updateLayers();
-          window.addEventListener('scroll', onScroll);
-        }
-      }
-    })();
-  </script>
-</body>
+  </body>
 </html>
-
-
-
-
-
 
 

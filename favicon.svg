@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="auralis-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b35" />
+      <stop offset="55%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="auralis-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0b1020" />
+  <circle cx="32" cy="32" r="24" fill="none" stroke="url(#auralis-ring)" stroke-width="3" opacity="0.85" />
+  <path
+    d="M20 49 L27 21 H37 L44 49"
+    fill="none"
+    stroke="url(#auralis-grad)"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M25 39 H39"
+    fill="none"
+    stroke="#0b1020"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+</svg>

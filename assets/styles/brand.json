@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "name": "suomicoolfun",
+    "shortName": "suomicoolfun",
+    "tagline": "Next-Gen Social Arcade Experience",
+    "homepage": "w.html",
+    "gamesPage": "games.html",
+    "copyright": "© 2025 suomicoolfun Gaming Platform. All rights reserved.",
+    "legal": {
+      "terms": "terms.html",
+      "privacy": "privacy.html"
+    }
+  },
+  "palette": {
+    "neonPink": "#003f88",
+    "neonBlue": "#2563eb",
+    "neonPurple": "#003f88",
+    "neonCyan": "#5dade2",
+    "dark": "#0f1d3a",
+    "darker": "#070f22",
+    "cardDark": "#1f3458"
+  },
+  "fonts": {
+    "heading": "Outfit",
+    "body": "Poppins"
+  }
+}
